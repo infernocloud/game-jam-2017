@@ -1,0 +1,31 @@
+body {
+	min-width: 1280px;
+	min-height: 720px;
+	overflow: hidden;
+	background: #ccc;
+	margin: 0;
+	padding: 0;
+}
+
+/* 1872 x 932px at 1080p */
+/* 1232 x 672px at 1080p */
+.game-board {
+	width: 1232px;
+    height: 672px;
+    margin: 24px auto;
+    background: #eee;
+}
+
+.card {
+	float: left;
+	box-sizing: border-box;
+    margin: 0;
+    width: 16.6667%;
+    height: 143px;
+    padding: 12px;
+    background: #f00;
+}
+
+.card:nth-child(2n) {
+	background: #0f0;
+}
