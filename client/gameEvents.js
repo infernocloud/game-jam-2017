@@ -71,7 +71,7 @@ function renderPlayer(i) {
 function renderCard(i) {
 	var factionsCopy = factions.slice();
 	var myFactions = [];
-	var factionPoints = ["+1","-2","-3"];
+	var factionPoints = ["+1","-1","-2"];
 
 	for (var x = 0; x < 3; x++) {
 		var pickFactionID = randRange(0, factionsCopy.length);
