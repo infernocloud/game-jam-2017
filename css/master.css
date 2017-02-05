@@ -5,6 +5,7 @@ body {
 	background: #ccc;
 	margin: 0;
 	padding: 0;
+	font-family: "Helvetica", "Segoe-UI", sans-serif;
 }
 
 /* 1872 x 932px at 1080p */
@@ -28,4 +29,78 @@ body {
 
 .card:nth-child(2n) {
 	background: #0f0;
+}
+
+.players {
+	height: 100px;
+	position: absolute;
+	bottom: 0;
+	left: 24px;
+	right: 24px;
+
+	background: #000;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+}
+
+.player {
+	width: 25%;
+	height: 75px;
+	position: relative;
+}
+
+.player.active {
+	height: 100%;
+}
+
+.player-name {
+	position: absolute;
+	bottom: 8px;
+	left: 16px;
+
+	color: #fff;
+	font-weight: bold;
+}
+
+.player-1 {
+	background: red;
+}
+.player-2 {
+	background: blue;
+}
+.player-3 {
+	background: green;
+}
+.player-4 {
+	background: yellow;
+}
+
+.faction-scores {
+	position: absolute;
+    top: 0;
+    height: 40px;
+    width: 100%;
+}
+
+.faction-scores .faction {
+	position: absolute;
+    width: 25%;
+    bottom: 0;
+    /*top: 80%; top set by javascript*/
+    background: #fff;
+	top:20%;
+}
+
+.faction-scores .faction:nth-child(1) {
+	left: 0;
+}
+.faction-scores .faction:nth-child(2) {
+	left: 25%;
+}
+.faction-scores .faction:nth-child(3) {
+	left: 50%;
+}
+.faction-scores .faction:nth-child(4) {
+	left: 75%;
 }
