@@ -123,6 +123,10 @@ $(function() {
 		}
 	});
 
+	$("#splash button").click(function(){
+		$("#splash").fadeOut();
+	});
+
 	$(document).on("click", function(e) {
 		if (cardRemoveConfirmation && !(cardRemoveConfirmation.is(e.target)) && cardRemoveConfirmation.has(e.target).length === 0) {
 			$(cardRemoveConfirmation).removeClass("remove");
