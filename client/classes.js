@@ -1,10 +1,26 @@
 // load cardDefinitions.js before this file
 
+var factions = {
+	"military": {
+		abbr: "mil"
+	},
+	"agriculture": {
+		abbr: "agr"
+	},
+	"education": {
+		abbr: "edu"
+	},
+	"business": {
+		abbr: "bus"
+	}
+};
+
 class CardGame {
 	loadDeck() {
 		// temporary "deck" array
 		let deck = [];
 		for (let i = 0; i < 2; i++) {
+			//Load 2 of each card type into deck
 			cardDefs.forEach(function(obj) {
 				deck.push(new Card(
 					obj.flavortext,
@@ -18,7 +34,7 @@ class CardGame {
 		this.cards = deck;
 	}
 	addPlayer(name) {
-		this.players.push(new Player(name));
+		this.players.push(new Player(name, this.players.length + 1));
 	}
 	start() {
 		/**
@@ -35,6 +51,7 @@ class CardGame {
 		 * This for loop deals the remaining 24 cards to players
 		 * (cards 24 - 47 from cards array)
 		 * shuffling is already handled
+		 * @TODO change to drafting
 		 */
 		for (let a = 0; a < this.players.length; a++) {
 			for (let i = 24; i < (24 + 24 / this.players.length); i++) {
@@ -42,6 +59,8 @@ class CardGame {
 				this.players[a].addCard(this.cards[i + (a * 24 / this.players.length)]);
 			}
 		}
+
+		$(".player-1").addClass("active");
 	}
 	checkGameEnded() {
 		if (this.board.cards.length <= this.players.length) {
@@ -147,6 +166,9 @@ class CardGame {
 		if (this.currentPlayer >= this.players.length) {
 			this.currentPlayer = 0;
 		}
+
+		$(".active").removeClass("active");
+		$(".player-" + (this.currentPlayer + 1)).addClass("active");
 	}
 	constructor() {
 		this.cards   = [];
@@ -154,6 +176,7 @@ class CardGame {
 		this.winners = [];
 		this.board   = new Board();
 		this.currentPlayer = 0;
+		this.round = 0;
 		this.loadDeck();
 		this.shuffleCards();
 	}
@@ -166,9 +189,13 @@ class Board {
 	addCard(card) {
 		card.location = this;
 		this.cards.push(card);
+		card.renderCard(".game-board", "board", this.cards.length - 1);
 	}
 	removeCard(i) {
+		//this.cards[i].cardDOM.remove();
 		this.cards.splice(i, 1);
+		console.log("Removed card from board!");
+		console.log(this.cards);
 	}
 }
 
@@ -181,16 +208,55 @@ class Card {
 		this.business    = b;
 		this.location    = o;
 	}
+	renderCard(target, cardPosition, cardPositionIndex) {
+		//target = ".game-board" or ".player-x-hand"
+		var factionPoints = [
+			{key: "military", points: this.military},
+			{key: "education", points: this.education},
+			{key: "agriculture", points: this.agriculture},
+			{key: "business", points: this.business}
+		];
+
+		factionPoints.sort(function(a,b) {
+			if (a.points < b.points) {
+				return -1;
+			}
+
+			if (a.points > b.points) {
+				return 1;
+			}
+
+			//both are equal
+			return 0;
+		});
+
+		var cardDOM = "<div class='card benefit-" + factions[factionPoints[0].key].abbr + "' data-card-position='" + cardPosition + "' data-card-position-index='" + cardPositionIndex + "'><div class='title'>" + this.flavortext + "</div><div class='faction-points'>";
+
+		for (var x = 0; x < factionPoints.length - 1; x++) {
+			cardDOM += "<div class='faction-" + factions[factionPoints[x].key].abbr + "'>" + factionPoints[x].points + "</div>";
+		}
+
+		cardDOM += "</div></div>";
+
+		this.cardDOM = $(cardDOM);
+
+		$(target).append(this.cardDOM);
+	}
 }
 
 class Player {
-	constructor(name) {
+	constructor(name, playerID) {
 		this.name      = name;
+		this.playerID = playerID;
+		this.playerDOM = 0;
 		this.hand      = [];
 		this.scoreZone = [];
 		this.score     = 0;  // set by final scoring in Game.end()
 		this.favor     = {}; // populated by calcFactionFavors function
 		this.factions  = []; // populated by final scoring in Game.end()
+		this.turnPhaseTracker = 0;
+
+		this.renderPlayer(".players");
 	}
 	calcFactionFavors() {
 		// temporary favor object
@@ -208,6 +274,12 @@ class Player {
 			favors.business    += card.business;
 		});
 		this.favor = favors;
+
+		//update display
+		$(this.playerDOM).find(".faction-mil").html(this.favor.military);
+		$(this.playerDOM).find(".faction-agr").html(this.favor.agriculture);
+		$(this.playerDOM).find(".faction-edu").html(this.favor.education);
+		$(this.playerDOM).find(".faction-bus").html(this.favor.business);
 	}
 	addCard(card) {
 		card.location = this;
@@ -223,5 +295,23 @@ class Player {
 		this.hand[i].location = gameBoard;
 		this.hand.splice(i, 1);
 	}
-}
+	renderPlayer(target) {
+		var playerDOM = '\
+		<div class="player player-' + this.playerID + '">\
+			<div class="breaking-news">Breaking News</div>\
+			<div class="player-stats">\
+				<div class="player-name">' + this.name + '</div>\
+				<div class="faction-scores">\
+					<div class="faction faction-mil">0</div>\
+					<div class="faction faction-agr">0</div>\
+					<div class="faction faction-edu">0</div>\
+					<div class="faction faction-bus">0</div>\
+				</div>\
+			</div>\
+		</div>';
 
+		this.playerDOM = $(playerDOM);
+
+		$(target).append(this.playerDOM);
+	}
+}

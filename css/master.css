@@ -202,7 +202,8 @@ body {
 	width: 23%;
 	margin: 0 1%;
     bottom: 0;
-    border-left: 16px solid #555;
+    /*border-left: 16px solid #555;*/
+	color: #555;
 }
 
 .faction-scores .faction:nth-child(1) {
