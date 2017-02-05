@@ -20,6 +20,10 @@ var factions = [
 var clockTimer = 0;
 var cardRemoveConfirmation = 0;
 
+$("#splash button").click(function(){
+	$("#splash").fadeOut();
+})
+
 $(".faction-scores .faction").each(function(){
 	var randHeight = Math.floor(Math.random() * 100);
 	$(this).height(randHeight + "%");
