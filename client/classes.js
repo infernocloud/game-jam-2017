@@ -217,12 +217,18 @@ class Card {
 			{key: "business", points: this.business}
 		];
 
+		factionPoints.forEach(function(faction, i) {
+			if (faction.points === 0) {
+				factionPoints.splice(i,1);
+			}
+		});
+
 		factionPoints.sort(function(a,b) {
-			if (a.points < b.points) {
+			if (a.points > b.points) {
 				return -1;
 			}
 
-			if (a.points > b.points) {
+			if (a.points < b.points) {
 				return 1;
 			}
 
@@ -230,9 +236,11 @@ class Card {
 			return 0;
 		});
 
+		console.log(factionPoints);
+
 		var cardDOM = "<div class='card benefit-" + factions[factionPoints[0].key].abbr + "' data-card-position='" + cardPosition + "' data-card-position-index='" + cardPositionIndex + "'><div class='title'>" + this.flavortext + "</div><div class='faction-points'>";
 
-		for (var x = 0; x < factionPoints.length - 1; x++) {
+		for (var x = 0; x < factionPoints.length; x++) {
 			cardDOM += "<div class='faction-" + factions[factionPoints[x].key].abbr + "'>" + factionPoints[x].points + "</div>";
 		}
 
@@ -268,6 +276,7 @@ class Player {
 		}
 		// calculate
 		this.scoreZone.forEach(function(card) {
+			console.log(card);
 			favors.military    += card.military;
 			favors.education   += card.education;
 			favors.agriculture += card.agriculture;
@@ -287,8 +296,10 @@ class Player {
 	}
 	removeCardFromBoard(i, gameBoard) {
 		this.scoreZone.push(gameBoard.cards[i]);
+		console.log(gameBoard.cards[i]);
 		gameBoard.cards[i].location = this.scoreZone;
 		gameBoard.removeCard(i);
+		this.calcFactionFavors();
 	}
 	addCardToBoard(i, gameBoard) {
 		gameBoard.addCard(this.hand[i]);
