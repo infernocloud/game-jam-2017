@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Reductive Order</title>
+	<style type="text/css">
+		.caption {
+			display: block;
+			font-size: larger;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+
+	<div id="playersSelection">
+		<span class="caption">How many players?</span>
+		<button data-amt="2">2</button>
+		<button data-amt="3">3</button>
+		<button data-amt="4">4</button>
+	</div>
+
+	<div id="playersNames">
+		<span class="caption">What are your names?</span>
+	</div>
+
+	<div id="draft"><span class="caption"></span></div>
+
+	<div id="board"><span class="caption"></span></div>
+	<hr>
+	<div id="cards"></div>
+
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="cardDefinitions.js"></script>
+	<script src="classes.js"></script>
+	<script src="functions.js"></script>
+</body>
+</html>

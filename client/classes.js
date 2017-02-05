@@ -20,16 +20,60 @@ class CardGame {
 	addPlayer(name) {
 		this.players.push(new Player(name));
 	}
-	start() {
+	startDraft() {
+		let g = this; // buffer
+		$("#draft").empty().append("<span class='caption'>" + g.players[0].name + " is picking!</span>");
+		$("#board").empty().append("<span class='caption'>" + g.players[0].name + " - remove 2!</span>");
 		for (let i = 0; i < 24; i++) {
 			console.log("Dealt to board");
 			this.board.addCard(this.cards[i]);
+			$("<div>mil:" 
+				+ this.cards[i].military + " edu:" 
+				+ this.cards[i].education + " agr:" 
+				+ this.cards[i].agriculture + " bus:" 
+				+ this.cards[i].business + " ***** " 
+				+ this.cards[i].flavortext + "</div>"
+			).appendTo("#board").click(function() {
+				g.players[g.currentPlayer].removeCardFromBoard(i, g.board);
+				$(this).remove();
+				if (g.players[g.currentPlayer].removed == 2) {
+					$("#board .caption").html("<span class='caption'>" + g.players[g.currentPlayer].name + " - add one card!</span>");
+					g.players[g.currentPlayer].hand.forEach(function(e, w) {
+						$("<div>mil:" 
+							+ e.military + " edu:" 
+							+ e.education + " agr:" 
+							+ e.agriculture + " bus:" 
+							+ e.business + " ***** " 
+							+ e.flavortext + "</div>"
+						).appendTo("#cards").click(function() {
+							$(this).remove();
+							g.players[g.currentPlayer].addCardToBoard(w, g.board);
+							$("#cards").empty();
+							g.nextTurn();
+						});
+					});
+				}
+			});
 		}
-		for (let a = 0; a < this.players.length; a++) {
-			for (let i = 24; i < (24 + 24 / this.players.length); i++) {
-				console.log("Dealt to " + this.players[a].name);
-				this.players[a].addCard(this.cards[i + (a * 24 / this.players.length)]);
-			}
+		for (let i = 24; i < 48; i++) {
+			$("<div>mil:" 
+				+ this.cards[i].military + " edu:" 
+				+ this.cards[i].education + " agr:" 
+				+ this.cards[i].agriculture + " bus:" 
+				+ this.cards[i].business + " ***** " 
+				+ this.cards[i].flavortext + "</div>"
+			).appendTo("#draft").click(function() {
+				g.players[g.currentPlayer].addCard(g.cards[i]);
+				$(this).remove();
+				g.nextTurn();
+				$("#draft .caption").html(g.players[g.currentPlayer].name + " is picking!");
+				g.checkDraftEnd();
+			});
+		}
+	}
+	checkDraftEnd() {
+		if (this.players[this.players.length - 1].hand.length == (24 / this.players.length)) {
+			this.start();
 		}
 	}
 	checkGameEnded() {
@@ -38,6 +82,10 @@ class CardGame {
 			return true;
 		}
 		return false;
+	}
+	start() {
+		$("#draft").hide();
+		$("#board").show();
 	}
 	end() {
 		let factionHighest = {
@@ -136,6 +184,7 @@ class CardGame {
 		if (this.currentPlayer >= this.players.length) {
 			this.currentPlayer = 0;
 		}
+		this.players[this.currentPlayer].removed = 0;
 	}
 	constructor() {
 		this.cards   = [];
@@ -177,6 +226,7 @@ class Player {
 		this.name      = name;
 		this.hand      = [];
 		this.scoreZone = [];
+		this.removed   = 0;  // used to keep track of turn
 		this.score     = 0;  // set by final scoring in Game.end()
 		this.favor     = {}; // populated by calcFactionFavors function
 		this.factions  = []; // populated by final scoring in Game.end()
@@ -206,6 +256,7 @@ class Player {
 		this.scoreZone.push(gameBoard.cards[i]);
 		gameBoard.cards[i].location = this.scoreZone;
 		gameBoard.removeCard(i);
+		this.removed++;
 	}
 	addCardToBoard(i, gameBoard) {
 		gameBoard.addCard(this.hand[i]);

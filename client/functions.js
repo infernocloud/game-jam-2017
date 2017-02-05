@@ -9,16 +9,33 @@ function randInt(max) {
 // create game -- does most of the setup
 var Game = new CardGame();
 
-// add test players
-Game.addPlayer("Andrew");
-Game.addPlayer("Michael");
-Game.addPlayer("Ben");
-Game.addPlayer("Kelly");
+$("#playersSelection").show();
+$("#playersNames").hide();
+$("#draft").hide();
+$("#board").hide();
 
-// start game
-Game.start();
+var numplayers = 0;
+
+$("#playersSelection button").click(function() {
+	numplayers = +$(this).attr("data-amt");
+	$("#playersSelection").hide();
+	$("#playersNames").show();
+	for (let i = 0; i < numplayers; i++) {
+		$("#playersNames").append("<input data-player='" + i + "' type='text' />");
+	}
+	$("<button>Go!</button>").appendTo("#playersNames").click(function() {
+		for (let i = 0; i < numplayers; i++) {
+			Game.addPlayer($("#playersNames").find("[data-player='" + i + "']").val());
+		}
+		$("#playersNames").hide();
+		$("#draft").show();
+		// start game
+		Game.startDraft();
+	});
+});
 
 
+/*
 // simulates the game
 console.log("%c Game started!", "color:red");
 let round = 0;
@@ -36,3 +53,4 @@ while (!Game.checkGameEnded()) {
 	});
 }
 console.log("%c Game ended!", "color:red");
+*/
