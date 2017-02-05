@@ -271,3 +271,31 @@ body {
 .faction-scores .faction:nth-child(4) {
 	left: 75%;
 }
+
+.card .faction-points .faction-edu {
+    background: url(book.png);
+    background-size: 40%;
+    background-repeat: no-repeat;
+    background-position: center 35px;
+}
+
+.card .faction-points .faction-mil {
+    background: url(cannon.png);
+    background-size: 40%;
+    background-repeat: no-repeat;
+    background-position: center 30px;
+}
+
+.card .faction-points .faction-agr {
+    background: url(wheat.png);
+    background-size: 40%;
+    background-repeat: no-repeat;
+    background-position: center 30px;
+}
+
+.card .faction-points .faction-bus {
+    background: url(briefcase.png);
+    background-size: 40%;
+    background-repeat: no-repeat;
+    background-position: center 30px;
+}
