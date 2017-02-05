@@ -21,10 +21,21 @@ class CardGame {
 		this.players.push(new Player(name));
 	}
 	start() {
+		/**
+		 * This for loop deals the first 24 cards to the board
+		 * (cards 0 - 23 from cards array)
+		 * shuffling is already handled
+		 */
 		for (let i = 0; i < 24; i++) {
 			console.log("Dealt to board");
 			this.board.addCard(this.cards[i]);
 		}
+
+		/**
+		 * This for loop deals the remaining 24 cards to players
+		 * (cards 24 - 47 from cards array)
+		 * shuffling is already handled
+		 */
 		for (let a = 0; a < this.players.length; a++) {
 			for (let i = 24; i < (24 + 24 / this.players.length); i++) {
 				console.log("Dealt to " + this.players[a].name);
