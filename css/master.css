@@ -10,14 +10,22 @@ body {
 
 #splash {
 	position: fixed;
-	top: 0px;
-	bottom: 0px;
-	left: 0px;
-	right: 0px;
-	width: 100%;
-	background-color: #678;
-	z-index: 1000000;
-	font-family: "Roboto Slab";
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px 20%;
+    color: #066b38;
+    background-color: #000;
+    z-index: 1000000;
+}
+
+#splash p {
+	text-shadow: -2px -10px 12px #066b38;
+	font-family: monospace;
+	font-size: 18px;
 }
 
 #splash em {
@@ -40,9 +48,7 @@ body {
 }
 
 #splash h1 {
-	position: fixed;
 	color: #fff;
-	bottom: 60%;
 	width: 100%;
 	text-align: center;
 	display: block;
@@ -50,16 +56,14 @@ body {
 }
 
 #splash button {
-	width: 300px;
-	height: 100px;
 	font-size: 50px;
-	position: fixed;
-	bottom: 20%;
-	left: calc(50% - 150px);
-	font-family: "Roboto Slab";
-	background-color: #fff;
-	border: 2px solid #999;
-	cursor: pointer;
+    padding: 32px 64px;
+    background: none;
+    border: 2px dashed #066b38;
+    color: #066b38;
+    cursor: pointer;
+	text-shadow: -1px -5px 12px #066b38;
+	font-family: monospace;
 }
 
 .game-board {
