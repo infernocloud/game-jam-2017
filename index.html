@@ -6,13 +6,17 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Game Jam 2017</title>
 		<link rel="stylesheet" href="/css/master.css">
-		<script src="client/lib/jquery-3.1.1.min.js"></script>
-		<script src="client/gameEvents.js"></script>
 	</head>
 	<body>
+		<div class="network-badge">
+			<div class="network-name">BNN</div>
+			<div class="clock">23:59</div>
+		</div>
+
 		<div class="players">
 			<div class="player player-1">
 				<div class="player-name">Player 1</div>
+				<div class="breaking-news">Breaking News</div>
 
 				<div class="faction-scores">
 					<div class="faction faction-mil"></div>
@@ -23,6 +27,7 @@
 			</div>
 			<div class="player player-2 active">
 				<div class="player-name">Player 2</div>
+				<div class="breaking-news">Breaking News</div>
 
 				<div class="faction-scores">
 					<div class="faction faction-mil"></div>
@@ -33,6 +38,7 @@
 			</div>
 			<div class="player player-3">
 				<div class="player-name">Player 3</div>
+				<div class="breaking-news">Breaking News</div>
 
 				<div class="faction-scores">
 					<div class="faction faction-mil"></div>
@@ -43,6 +49,7 @@
 			</div>
 			<div class="player player-4">
 				<div class="player-name">Player 4</div>
+				<div class="breaking-news">Breaking News</div>
 
 				<div class="faction-scores">
 					<div class="faction faction-mil"></div>
@@ -54,202 +61,10 @@
 		</div>
 
 		<div class="game-board">
-			<div class="card benefit-mil">
-				<div class="title">Test card</div>
-				<div class="faction-points">
-					<div class="faction-mil">1</div>
-					<div class="faction-agr">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
-			<div class="card benefit-bus">
-				<div class="title">Test card 2</div>
-				<div class="faction-points">
-					<div class="faction-bus">1</div>
-					<div class="faction-mil">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
-			<div class="card benefit-mil">
-				<div class="title">Test card</div>
-				<div class="faction-points">
-					<div class="faction-mil">1</div>
-					<div class="faction-agr">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
-			<div class="card benefit-bus">
-				<div class="title">Test card 2</div>
-				<div class="faction-points">
-					<div class="faction-bus">1</div>
-					<div class="faction-mil">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
-			<div class="card benefit-mil">
-				<div class="title">Test card</div>
-				<div class="faction-points">
-					<div class="faction-mil">1</div>
-					<div class="faction-agr">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
-			<div class="card benefit-bus">
-				<div class="title">Test card 2</div>
-				<div class="faction-points">
-					<div class="faction-bus">1</div>
-					<div class="faction-mil">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
-			<div class="card benefit-mil">
-				<div class="title">Test card</div>
-				<div class="faction-points">
-					<div class="faction-mil">1</div>
-					<div class="faction-agr">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
-			<div class="card benefit-bus">
-				<div class="title">Test card 2</div>
-				<div class="faction-points">
-					<div class="faction-bus">1</div>
-					<div class="faction-mil">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
-			<div class="card benefit-mil">
-				<div class="title">Test card</div>
-				<div class="faction-points">
-					<div class="faction-mil">1</div>
-					<div class="faction-agr">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
-			<div class="card benefit-bus">
-				<div class="title">Test card 2</div>
-				<div class="faction-points">
-					<div class="faction-bus">1</div>
-					<div class="faction-mil">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
-			<div class="card benefit-mil">
-				<div class="title">Test card</div>
-				<div class="faction-points">
-					<div class="faction-mil">1</div>
-					<div class="faction-agr">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
-			<div class="card benefit-bus">
-				<div class="title">Test card 2</div>
-				<div class="faction-points">
-					<div class="faction-bus">1</div>
-					<div class="faction-mil">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
-			<div class="card benefit-mil">
-				<div class="title">Test card</div>
-				<div class="faction-points">
-					<div class="faction-mil">1</div>
-					<div class="faction-agr">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
-			<div class="card benefit-bus">
-				<div class="title">Test card 2</div>
-				<div class="faction-points">
-					<div class="faction-bus">1</div>
-					<div class="faction-mil">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
-			<div class="card benefit-mil">
-				<div class="title">Test card</div>
-				<div class="faction-points">
-					<div class="faction-mil">1</div>
-					<div class="faction-agr">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
-			<div class="card benefit-bus">
-				<div class="title">Test card 2</div>
-				<div class="faction-points">
-					<div class="faction-bus">1</div>
-					<div class="faction-mil">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
-			<div class="card benefit-mil">
-				<div class="title">Test card</div>
-				<div class="faction-points">
-					<div class="faction-mil">1</div>
-					<div class="faction-agr">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
-			<div class="card benefit-bus">
-				<div class="title">Test card 2</div>
-				<div class="faction-points">
-					<div class="faction-bus">1</div>
-					<div class="faction-mil">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
-			<div class="card benefit-mil">
-				<div class="title">Test card</div>
-				<div class="faction-points">
-					<div class="faction-mil">1</div>
-					<div class="faction-agr">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
-			<div class="card benefit-bus">
-				<div class="title">Test card 2</div>
-				<div class="faction-points">
-					<div class="faction-bus">1</div>
-					<div class="faction-mil">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
-			<div class="card benefit-mil">
-				<div class="title">Test card</div>
-				<div class="faction-points">
-					<div class="faction-mil">1</div>
-					<div class="faction-agr">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
-			<div class="card benefit-bus">
-				<div class="title">Test card 2</div>
-				<div class="faction-points">
-					<div class="faction-bus">1</div>
-					<div class="faction-mil">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
-			<div class="card benefit-mil">
-				<div class="title">Test card</div>
-				<div class="faction-points">
-					<div class="faction-mil">1</div>
-					<div class="faction-agr">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
-			<div class="card benefit-bus">
-				<div class="title">Test card 2</div>
-				<div class="faction-points">
-					<div class="faction-bus">1</div>
-					<div class="faction-mil">-1</div>
-					<div class="faction-edu">-2</div>
-				</div>
-			</div>
+
 		</div>
 
-		<script>
-			document.getElementsbyClass("")
-		</script>
+		<script src="client/lib/jquery-3.1.1.min.js"></script>
+		<script src="client/gameEvents.js"></script>
 	</body>
 </html>
