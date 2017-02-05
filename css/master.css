@@ -116,6 +116,13 @@ body {
 .card .faction-points div {
 	flex: 1;
 	text-align: center;
+    color: #d55;
+    font-size: 70%;
+    font-weight: bold;
+}
+
+.card .faction-points div:first-of-type {
+    color: #08e;
 }
 
 .network-badge {
@@ -255,8 +262,9 @@ body {
 	box-sizing: border-box;
 	width: 23%;
 	margin: 0 1%;
-	bottom: 0;
-	border-left: 16px solid #555;
+    bottom: 0;
+    /*border-left: 16px solid #555;*/
+	color: #555;
 }
 
 .faction-scores .faction:nth-child(1) {
@@ -270,4 +278,32 @@ body {
 }
 .faction-scores .faction:nth-child(4) {
 	left: 75%;
+}
+
+.card .faction-points .faction-edu {
+    background: url(book.png);
+    background-size: 40%;
+    background-repeat: no-repeat;
+    background-position: center 35px;
+}
+
+.card .faction-points .faction-mil {
+    background: url(cannon.png);
+    background-size: 40%;
+    background-repeat: no-repeat;
+    background-position: center 30px;
+}
+
+.card .faction-points .faction-agr {
+    background: url(wheat.png);
+    background-size: 40%;
+    background-repeat: no-repeat;
+    background-position: center 30px;
+}
+
+.card .faction-points .faction-bus {
+    background: url(briefcase.png);
+    background-size: 40%;
+    background-repeat: no-repeat;
+    background-position: center 30px;
 }
